@@ -18,36 +18,22 @@ export class UserController {
 
   @Post('/login')
   async login(@Param('email') email: string, senha: string) {
-    try {
-      const admin = await this.adminService.findAdminByEmail(email);
-      if(admin != null){
-        const result = await bcrypt.compare(senha, admin.senha);
-        if(result){
-          return `Administrador ${admin.nome} efetuou login!`
-        }else{
-          console.error('Email e/ou senha inválido(s)');
-        }
-      }
-      const student = await this.studentService.findStudentByEmail(email);
-      if(student != null){
-        const result = await bcrypt.compare(senha, student.senha);
-        if(result){
-          return `Estudante ${student.nome} efetuou login!`
-        }else{
-          console.error('Email e/ou senha inválido(s)');
-        }
-      }
-      const driver = await this.driverService.findDriverByEmail(email);
-      if(driver != null){
-        const result = await bcrypt.compare(senha, driver.senha);
-        if(result){
-          return `Motorista ${driver.nome} efetuou login!`
-        }else{
-          console.error('Email e/ou senha inválido(s)');
-        }
-      }
-    } catch (error) {
-      
+    const admin = await this.adminService.findAdminByEmail(email);
+    if(admin != null){
+      const result = await bcrypt.compare(senha, admin.senha);
+      if(result){return `Administrador ${admin.nome} efetuou login!`}
+    }
+    const student = await this.studentService.findStudentByEmail(email);
+    if(student != null){
+      const result = await bcrypt.compare(senha, student.senha);
+      if(result){return `Estudante ${student.nome} efetuou login!`}
+    }
+    const driver = await this.driverService.findDriverByEmail(email);
+    if(driver != null){
+      const result = await bcrypt.compare(senha, driver.senha);
+      if(result){return `Motorista ${driver.nome} efetuou login!`}
+    }else{
+      console.error('Não foi possível efetuar login!\nEmail e/ou senha inválido(s)');
     }
   }
 }
