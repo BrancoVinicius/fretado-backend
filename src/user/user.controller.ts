@@ -25,29 +25,27 @@ export class UserController {
         if(result){
           return `Administrador ${admin.nome} efetuou login!`
         }else{
-          console.error('Email e/ou senha inválido(s)');
-        }
-      }
-      const student = await this.studentService.findStudentByEmail(email);
-      if(student != null){
-        const result = await bcrypt.compare(senha, student.senha);
-        if(result){
-          return `Estudante ${student.nome} efetuou login!`
-        }else{
-          console.error('Email e/ou senha inválido(s)');
-        }
-      }
-      const driver = await this.driverService.findDriverByEmail(email);
-      if(driver != null){
-        const result = await bcrypt.compare(senha, driver.senha);
-        if(result){
-          return `Motorista ${driver.nome} efetuou login!`
-        }else{
-          console.error('Email e/ou senha inválido(s)');
+          const student = await this.studentService.findStudentByEmail(email);
+          if(student != null){
+            const result = await bcrypt.compare(senha, student.senha);
+            if(result){
+              return `Estudante ${student.nome} efetuou login!`
+            }else{
+              const driver = await this.driverService.findDriverByEmail(email);
+              if(driver != null){
+              const result = await bcrypt.compare(senha, driver.senha);
+              if(result){
+                return `Motorista ${driver.nome} efetuou login!`
+              }else{
+                console.error('Email e/ou senha inválido(s)');
+              }
+              }
+            }
+          }
         }
       }
     } catch (error) {
-      
+      console.error('Não foi possível efetuar login!');
     }
   }
 }
