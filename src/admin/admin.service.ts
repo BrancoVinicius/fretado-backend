@@ -9,20 +9,21 @@ const prisma = new PrismaClient()
 @Injectable()
 export class AdminService {
   async create(dto: CreateAdminDto) {
-    const emailVerify = this.findAdminByEmail(dto.email);
-
-    if(emailVerify != null){
+    const emailVerify = await this.findAdminByEmail(dto.email);
+    
+    if (emailVerify != null) {
       error("Este e-mail já está vinculado a um(a) administrador!");
-    }else{
+    } else {
       const admin = await prisma.admin.create({
-        data:{
+        data: {
           nome: dto.nome,
           email: dto.email,
           senha: dto.senha,
           fotoB64: dto.fotoB64
-        }});
+        }
+      });
 
-        return `ID:${admin.id}\nAdministrador Cadastrado Com Sucesso!`;
+      return `ID:${admin.id}\nAdministrador Cadastrado Com Sucesso!`;
     }
   }
 
@@ -32,42 +33,43 @@ export class AdminService {
   }
 
   async findAdminById(id: number) {
-    const admin = await prisma.admin.findUnique({where: {id: id}});
+    const admin = await prisma.admin.findUnique({ where: { id: id } });
     return admin;
   }
-  
+
   async findAdminByEmail(email: string) {
-    const admin = await prisma.admin.findUnique({where: {email: email}});
+    const admin = await prisma.admin.findUnique({ where: { email: email } });
     return admin;
   }
 
   async updateAdminPhoto(photo: string, id: number) {
-    const admin = await prisma.admin.update({where:{id: id}, data:{fotoB64: photo}});
+    const admin = await prisma.admin.update({ where: { id: id }, data: { fotoB64: photo } });
 
     return `Foto do(a) administrador(a) ${admin.nome} atualizada com sucesso!`
   }
 
   async update(id: number, dto: UpdateAdminDto) {
     const admin = await prisma.admin.update({
-      where:{id: id},
-      data:{
+      where: { id: id },
+      data: {
         nome: dto.nome,
         email: dto.email,
         senha: dto.senha,
         fotoB64: dto.fotoB64
-      }});
+      }
+    });
 
     return admin;
   }
 
   async remove(id: number) {
-    const admin = await prisma.admin.delete({where:{id: id}});
+    const admin = await prisma.admin.delete({ where: { id: id } });
 
-    const removedAdmin = prisma.admin.findUnique({where:{id: id}})
+    const removedAdmin = prisma.admin.findUnique({ where: { id: id } })
 
-    if(removedAdmin != null){
+    if (removedAdmin != null) {
       error('Motorista Ainda Existente!')
-    }else{
+    } else {
       return `Motorista Removido:\n${admin}`;
     }
   }

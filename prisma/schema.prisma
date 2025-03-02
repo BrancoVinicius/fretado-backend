@@ -15,24 +15,34 @@ model User {
 }
 
 model Student {
-  id           Int    @id @default(autoincrement())
-  nome         String
-  email        String @unique
-  senha        String
-  universidade String
-  turno        String
-  fotoB64      String
+  id        Int    @id @default(autoincrement())
+  nome      String
+  email     String @unique
+  senha     String
+  cpf       String
+  faculdade String
+  cep       String
+  bairro    String
+  rua       String
+  numero    String
+  fotoB64   String
 }
 
 model Driver {
-  id              Int    @id @default(autoincrement())
-  nome            String
-  email           String @unique
-  senha           String
-  habilitacaoFb64 String
-  habilitacaoVb64 String
-  turno           String
-  fotoB64         String
+  id          Int    @id @default(autoincrement())
+  nome        String
+  email       String @unique
+  senha       String
+  habilitacao String
+  fotoB64     String
+}
+
+model Van {
+  id     Int    @id @default(autoincrement())
+  modelo String
+  placa  String @unique
+  ano    String
+  cor    String
 }
 
 model Admin {

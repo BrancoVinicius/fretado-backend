@@ -3,20 +3,16 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class Driver {
     @IsNotEmpty()
     @IsString()
-    nome: string;
+    modelo: string;
 
     @IsNotEmpty()
     @IsEmail()
-    email: string;
+    placa: string;
 
     @IsNotEmpty()
     @IsString()
-    senha: string;
-
-    @IsNotEmpty()
-    @IsString()
-    habilitacao: string;
+    ano: string;
 
     @IsString()
-    fotoB64: string;
+    cor: string;
 }

@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 export class DriverService {
   async create(dto: CreateDriverDto) {
     
-    const emailVerify = this.findDriverByEmail(dto.email);
+    const emailVerify = await this.findDriverByEmail(dto.email);
 
     if(emailVerify != null){
       error("Este e-mail já está vinculado a um(a) motorista!");
@@ -19,11 +19,9 @@ export class DriverService {
         data:{
           nome: dto.nome,
           email: dto.email,
-          senha: dto.senha,
-          habilitacaoFb64: dto.habilitacaoFb64,
-          habilitacaoVb64: dto.habilitacaoVb64,
-          turno: dto.turno,
-          fotoB64: dto.fotoB64
+          senha: "123",
+          habilitacao: dto.habilitacao,
+          fotoB64: "123"
         }});
 
         return `ID:${driver.id}\nMotorista Cadastrado Com Sucesso!`;
@@ -58,9 +56,7 @@ export class DriverService {
         nome: dto.nome,
         email: dto.email,
         senha: dto.senha,
-        habilitacaoFb64: dto.habilitacaoFb64,
-        habilitacaoVb64: dto.habilitacaoVb64,
-        turno: dto.turno,
+        habilitacao: dto.habilitacao,
         fotoB64: dto.fotoB64
       }});
 

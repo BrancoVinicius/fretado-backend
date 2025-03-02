@@ -9,7 +9,11 @@ import * as bcrypt from "bcrypt";
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService, private readonly adminService: AdminService, private readonly studentService: StudentService, private readonly driverService: DriverService) {}
+  constructor(private readonly userService: UserService,
+    private readonly adminService: AdminService,
+    private readonly studentService: StudentService,
+    private readonly driverService: DriverService
+  ) { }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -17,22 +21,22 @@ export class UserController {
   }
 
   @Post('/login')
-  async login(@Param('email') email: string, senha: string) {
-    const admin = await this.adminService.findAdminByEmail(email);
-    if(admin != null){
-      const result = await bcrypt.compare(senha, admin.senha);
-      if(result){return `Administrador ${admin.nome} efetuou login!`}
+  async login(@Body() user) {
+    const admin = await this.adminService.findAdminByEmail(user.email);
+    if (admin != null) {
+      //const result = await bcrypt.compare(user.senha, admin.senha);
+      if (user.senha == admin.senha) { return {data: admin, cargo: "admin"}}
     }
-    const student = await this.studentService.findStudentByEmail(email);
-    if(student != null){
-      const result = await bcrypt.compare(senha, student.senha);
-      if(result){return `Estudante ${student.nome} efetuou login!`}
+    const student = await this.studentService.findStudentByEmail(user.email);
+    if (student != null) {
+      //const result = await bcrypt.compare(user.senha, student.senha);
+      if (user.senha == student.senha) { return {data: student, cargo: "aluno"}}
     }
-    const driver = await this.driverService.findDriverByEmail(email);
-    if(driver != null){
-      const result = await bcrypt.compare(senha, driver.senha);
-      if(result){return `Motorista ${driver.nome} efetuou login!`}
-    }else{
+    const driver = await this.driverService.findDriverByEmail(user.email);
+    if (driver != null) {
+      //const result = await bcrypt.compare(user.senha, driver.senha);
+      if (user.senha == driver.senha) { return {data: driver, cargo: "motorista"} }
+    } else {
       console.error('Não foi possível efetuar login!\nEmail e/ou senha inválido(s)');
     }
   }

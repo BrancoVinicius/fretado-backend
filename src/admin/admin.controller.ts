@@ -8,13 +8,16 @@ import { UpdateStudentDto } from 'src/student/dto/update-student.dto';
 import { DriverService } from 'src/driver/driver.service';
 import { CreateDriverDto } from 'src/driver/dto/create-driver.dto';
 import { UpdateDriverDto } from 'src/driver/dto/update-driver.dto';
+import { VanService } from 'src/van/van.service';
+import { CreateVanDto } from 'src/van/dto/create-van.dto';
 
 @Controller('admin')
 export class AdminController {
   constructor(
     private readonly adminService: AdminService,
     private readonly studentService: StudentService,
-    private readonly driverService: DriverService) {}
+    private readonly driverService: DriverService,
+    private readonly vanService: VanService) { }
 
   @Post('/createAdmin')
   createAdmin(@Body() createAdminDto: CreateAdminDto) {
@@ -29,6 +32,11 @@ export class AdminController {
   @Post('/createDriver')
   createDriver(@Body() createDriverDto: CreateDriverDto) {
     return this.driverService.create(createDriverDto);
+  }
+
+  @Post('/createVan')
+  createVan(@Body() createVantDto: CreateVanDto) {
+    return this.vanService.create(createVantDto);
   }
 
   @Get('/findAdmin')
@@ -90,18 +98,18 @@ export class AdminController {
   updateDriver(@Param('id') id: string, @Body() updateDriverDto: UpdateDriverDto) {
     return this.driverService.update(+id, updateDriverDto);
   }
-    
-  @Patch('/updateAdminPhoto:id')
+
+  @Patch('/updateAdminPhoto/:id')
   updateAdminPhoto(@Param('id') photo: string, id: string) {
     return this.adminService.updateAdminPhoto(photo, +id);
   }
 
-  @Delete('/deleteStudent:id')
+  @Delete('/deleteStudent/:id')
   removeStudent(@Param('id') id: string) {
     return this.studentService.remove(+id);
   }
 
-  @Delete('/deleteDriver:id')
+  @Delete('/deleteDriver/:id')
   removeDriver(@Param('id') id: string) {
     return this.driverService.remove(+id);
   }

@@ -8,7 +8,9 @@ import { UserToken } from './models/UserToken';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UserService, private readonly jwtService: JwtService) { }
+    constructor(private readonly userService: UserService, 
+        private readonly jwtService: JwtService
+    ) { }
 
     login(user: User): UserToken {
         const payload: UserPayload = {
@@ -27,7 +29,7 @@ export class AuthService {
         const user = await this.userService.findByEmail(email);
 
         if (!!user) {
-            const isPasswordValid = await bcrypt.compare(password, user.password)
+            const isPasswordValid = await bcrypt.compare(password, user.senha)
 
             if (!!isPasswordValid) {
                 return {

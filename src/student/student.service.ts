@@ -10,21 +10,26 @@ const prisma = new PrismaClient()
 export class StudentService {
 
   async create(dto: CreateStudentDto) {
-    
-    const emailVerify = this.findStudentByEmail(dto.email);
 
-    if(emailVerify != null){
+    const emailVerify = await this.findStudentByEmail(dto.email);
+
+    if (emailVerify != null) {
       error("Este e-mail já está vinculado a um(a) estudante!");
-    }else{
+    } else {
       const student = await prisma.student.create({
-        data:{
+        data: {
           nome: dto.nome,
           email: dto.email,
-          senha: dto.senha,
-          universidade: dto.universidade,
-          turno: dto.turno,
-          fotoB64: dto.fotoB64
-        }});
+          senha: "123",
+          cpf: dto.cpf,
+          faculdade: dto.faculdade,
+          cep: dto.cep,
+          bairro: dto.bairro,
+          rua: dto.rua,
+          numero: dto.numero,
+          fotoB64: "123"
+        }
+      });
 
       return `ID:${student.id}\nEstudante Cadastrado Com Sucesso!`;
     }
@@ -36,44 +41,49 @@ export class StudentService {
   }
 
   async findStudentById(id: number) {
-    const student = await prisma.student.findUnique({where: {id: id}});
+    const student = await prisma.student.findUnique({ where: { id: id } });
     return student;
   }
 
   async findStudentByEmail(email: string) {
-    const student = await prisma.student.findUnique({where: {email: email}});
+    const student = await prisma.student.findUnique({ where: { email: email } });
     return student;
   }
 
   async updateStudentPhoto(photo: string, id: number) {
-    const student = await prisma.student.update({where:{id: id}, data:{fotoB64: photo}});
+    const student = await prisma.student.update({ where: { id: id }, data: { fotoB64: photo } });
 
     return `Foto do(a) estudante ${student.nome} atualizada com sucesso!`
   }
 
   async update(id: number, dto: UpdateStudentDto) {
     const student = await prisma.student.update({
-      where:{id: id},
-      data:{
+      where: { id: id },
+      data: {
         nome: dto.nome,
         email: dto.email,
         senha: dto.senha,
-        universidade: dto.universidade,
-        turno: dto.turno,
+        cpf: dto.cpf,
+        faculdade: dto.faculdade,
+        cep: dto.cep,
+        bairro: dto.bairro,
+        rua: dto.rua,
+        numero: dto.numero,
         fotoB64: dto.fotoB64
-      }});
+      }
+    });
 
     return student;
   }
 
   async remove(id: number) {
-    const student = await prisma.student.delete({where:{id: id}})
+    const student = await prisma.student.delete({ where: { id: id } })
 
-    const removedStudent = prisma.driver.findUnique({where:{id: id}})
+    const removedStudent = prisma.driver.findUnique({ where: { id: id } })
 
-    if(removedStudent != null){
+    if (removedStudent != null) {
       error('Motorista Ainda Existente!')
-    }else{
+    } else {
       return `Estudante Removido:\n${student}`;
     }
   }
