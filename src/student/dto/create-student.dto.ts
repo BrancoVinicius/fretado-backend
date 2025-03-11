@@ -22,5 +22,11 @@ export class CreateStudentDto extends PartialType(CreateUserDto) {
     numero: string;
 
     @IsString()
+    telefone: string;
+
+    @IsString()
+    itinerario: string;
+
+    @IsString()
     fotoB64: string;
 }

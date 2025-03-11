@@ -13,11 +13,13 @@ CREATE TABLE "Student" (
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
+    "telefone" TEXT NOT NULL,
     "faculdade" TEXT NOT NULL,
     "cep" TEXT NOT NULL,
     "bairro" TEXT NOT NULL,
     "rua" TEXT NOT NULL,
     "numero" TEXT NOT NULL,
+    "itinerario" TEXT NOT NULL,
     "fotoB64" TEXT NOT NULL
 );
 
@@ -49,6 +51,14 @@ CREATE TABLE "Admin" (
     "fotoB64" TEXT NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "Itinerario" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nome" TEXT NOT NULL,
+    "inicio" TEXT NOT NULL,
+    "final" TEXT NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -63,3 +73,6 @@ CREATE UNIQUE INDEX "Van_placa_key" ON "Van"("placa");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Itinerario_nome_key" ON "Itinerario"("nome");

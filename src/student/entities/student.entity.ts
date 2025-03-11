@@ -16,10 +16,18 @@ export class Student {
     @IsNotEmpty()
     @IsString()
     universidade: string;
+
+    @IsNotEmpty()
+    @IsString()
+    telefone: string;
     
     @IsNotEmpty()
     @IsString()
     turno: string;
+
+    @IsNotEmpty()
+    @IsString()
+    itinerario: string;
 
     @IsString()
     fotoB64: string;

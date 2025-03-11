@@ -25,8 +25,10 @@ export class StudentService {
           faculdade: dto.faculdade,
           cep: dto.cep,
           bairro: dto.bairro,
+          telefone: dto.telefone,
           rua: dto.rua,
           numero: dto.numero,
+          itinerario: dto.itinerario,
           fotoB64: "123"
         }
       });
@@ -60,16 +62,7 @@ export class StudentService {
     const student = await prisma.student.update({
       where: { id: id },
       data: {
-        nome: dto.nome,
-        email: dto.email,
-        senha: dto.senha,
-        cpf: dto.cpf,
-        faculdade: dto.faculdade,
-        cep: dto.cep,
-        bairro: dto.bairro,
-        rua: dto.rua,
-        numero: dto.numero,
-        fotoB64: dto.fotoB64
+        ...dto,
       }
     });
 

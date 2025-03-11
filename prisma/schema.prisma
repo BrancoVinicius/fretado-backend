@@ -15,17 +15,19 @@ model User {
 }
 
 model Student {
-  id        Int    @id @default(autoincrement())
-  nome      String
-  email     String @unique
-  senha     String
-  cpf       String
-  faculdade String
-  cep       String
-  bairro    String
-  rua       String
-  numero    String
-  fotoB64   String
+  id         Int    @id @default(autoincrement())
+  nome       String
+  email      String @unique
+  senha      String
+  cpf        String
+  telefone   String
+  faculdade  String
+  cep        String
+  bairro     String
+  rua        String
+  numero     String
+  itinerario String
+  fotoB64    String
 }
 
 model Driver {
@@ -51,4 +53,11 @@ model Admin {
   email   String @unique
   senha   String
   fotoB64 String
+}
+
+model Itinerario {
+  id     Int    @id @default(autoincrement())
+  nome   String @unique
+  inicio String
+  final  String
 }

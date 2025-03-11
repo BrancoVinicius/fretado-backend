@@ -10,6 +10,8 @@ import { CreateDriverDto } from 'src/driver/dto/create-driver.dto';
 import { UpdateDriverDto } from 'src/driver/dto/update-driver.dto';
 import { VanService } from 'src/van/van.service';
 import { CreateVanDto } from 'src/van/dto/create-van.dto';
+import { ItinerarioService } from 'src/itinerario/itinerario.service';
+import { CreateItinerarioDto } from 'src/itinerario/dto/create-itinerario.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -17,7 +19,8 @@ export class AdminController {
     private readonly adminService: AdminService,
     private readonly studentService: StudentService,
     private readonly driverService: DriverService,
-    private readonly vanService: VanService) { }
+    private readonly vanService: VanService,
+    private readonly itinerarioService: ItinerarioService) { }
 
   @Post('/createAdmin')
   createAdmin(@Body() createAdminDto: CreateAdminDto) {
@@ -37,6 +40,11 @@ export class AdminController {
   @Post('/createVan')
   createVan(@Body() createVantDto: CreateVanDto) {
     return this.vanService.create(createVantDto);
+  }
+
+  @Post('/createItinerario')
+  createItinerario(@Body() itinerarioService: CreateItinerarioDto) {
+    return this.itinerarioService.create(itinerarioService);
   }
 
   @Get('/findAdmin')
