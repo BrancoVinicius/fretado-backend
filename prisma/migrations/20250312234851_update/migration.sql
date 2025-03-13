@@ -20,7 +20,7 @@ CREATE TABLE "Student" (
     "rua" TEXT NOT NULL,
     "numero" TEXT NOT NULL,
     "itinerario" TEXT NOT NULL,
-    "fotoB64" TEXT NOT NULL
+    "fotoB64" TEXT
 );
 
 -- CreateTable
@@ -28,9 +28,11 @@ CREATE TABLE "Driver" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "telefone" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "habilitacao" TEXT NOT NULL,
-    "fotoB64" TEXT NOT NULL
+    "itinerario" TEXT NOT NULL,
+    "fotoB64" TEXT
 );
 
 -- CreateTable
@@ -38,6 +40,8 @@ CREATE TABLE "Van" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "modelo" TEXT NOT NULL,
     "placa" TEXT NOT NULL,
+    "capacidade" TEXT NOT NULL,
+    "itinerario" TEXT NOT NULL,
     "ano" TEXT NOT NULL,
     "cor" TEXT NOT NULL
 );
@@ -48,7 +52,7 @@ CREATE TABLE "Admin" (
     "nome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
-    "fotoB64" TEXT NOT NULL
+    "fotoB64" TEXT
 );
 
 -- CreateTable

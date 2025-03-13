@@ -29,7 +29,7 @@ export class StudentService {
           rua: dto.rua,
           numero: dto.numero,
           itinerario: dto.itinerario,
-          fotoB64: "123"
+          fotoB64: dto.fotoB64 ?? null
         }
       });
 

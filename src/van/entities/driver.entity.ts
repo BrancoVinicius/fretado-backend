@@ -11,6 +11,14 @@ export class Driver {
 
     @IsNotEmpty()
     @IsString()
+    capacidade: string;
+
+    @IsNotEmpty()
+    @IsString()
+    itinerario: string;
+
+    @IsNotEmpty()
+    @IsString()
     ano: string;
 
     @IsString()

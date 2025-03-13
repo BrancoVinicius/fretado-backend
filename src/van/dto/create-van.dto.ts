@@ -11,6 +11,14 @@ export class CreateVanDto {
 
     @IsNotEmpty()
     @IsString()
+    capacidade: string;
+
+    @IsNotEmpty()
+    @IsString()
+    itinerario: string;
+
+    @IsNotEmpty()
+    @IsString()
     ano: string;
 
     @IsNotEmpty()

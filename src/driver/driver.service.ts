@@ -21,7 +21,9 @@ export class DriverService {
           email: dto.email,
           senha: "123",
           habilitacao: dto.habilitacao,
-          fotoB64: "123"
+          telefone: dto.telefone,
+          itinerario: dto.itinerario,
+          fotoB64: dto.fotoB64 ?? null
         }
       });
 

@@ -19,7 +19,7 @@ export class AdminService {
           nome: dto.nome,
           email: dto.email,
           senha: dto.senha,
-          fotoB64: dto.fotoB64
+          fotoB64: dto.fotoB64 ?? null
         }
       });
 
