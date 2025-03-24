@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateVanDto {
     @IsNotEmpty()
@@ -13,9 +13,9 @@ export class CreateVanDto {
     @IsString()
     capacidade: string;
 
-    @IsNotEmpty()
-    @IsString()
-    itinerario: string;
+    @IsOptional()
+    @IsNumber()
+    itinerario: number;
 
     @IsNotEmpty()
     @IsString()

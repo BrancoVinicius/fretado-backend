@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class Student {
     @IsNotEmpty()
@@ -12,7 +12,7 @@ export class Student {
     @IsNotEmpty()
     @IsString()
     senha: string;
-    
+
     @IsNotEmpty()
     @IsString()
     universidade: string;
@@ -20,16 +20,24 @@ export class Student {
     @IsNotEmpty()
     @IsString()
     telefone: string;
-    
+
     @IsNotEmpty()
     @IsString()
     turno: string;
 
-    @IsNotEmpty()
-    @IsString()
-    itinerario: string;
+    @IsOptional()
+    @IsNumber()
+    itinerario: number;
 
     @IsOptional()
     @IsString()
     fotoB64: string;
+
+    @IsBoolean()
+    @IsOptional()
+    presenca: boolean;
+    
+    @IsNumber()
+    @IsOptional()
+    ordem: boolean;
 }

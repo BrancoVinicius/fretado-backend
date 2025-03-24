@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class Driver {
     @IsNotEmpty()
@@ -9,9 +9,9 @@ export class Driver {
     @IsEmail()
     email: string;
 
-    @IsNotEmpty()
-    @IsEmail()
-    itinerario: string;
+    @IsOptional()
+    @IsNumber()
+    itinerario: number;
 
     @IsNotEmpty()
     @IsString()

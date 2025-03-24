@@ -41,4 +41,11 @@ export class StudentController {
   remove(@Param('id') id: string) {
     return this.studentService.remove(+id);
   }
+
+  @Put('/aluno/ordenar')
+  updateAlunoOrder(
+    @Body() body: { alunos: { id: number, ordem: number }[] }
+  ) {
+    return this.studentService.updateAlunoOrder(body.alunos);
+  }
 }

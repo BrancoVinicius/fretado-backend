@@ -22,7 +22,7 @@ export class DriverService {
           senha: "123",
           habilitacao: dto.habilitacao,
           telefone: dto.telefone,
-          itinerario: dto.itinerario,
+          itinerario: dto.itinerario ?? null,
           fotoB64: dto.fotoB64 ?? null
         }
       });
@@ -64,7 +64,21 @@ export class DriverService {
   }
 
   async remove(id: number) {
-    const driver = await prisma.driver.delete({ where: { id: id } });
+
+    const driver = await prisma.driver.findUnique({ where: { id: id } });
+
+    if (!driver) {
+      throw new Error('Motorista não encontrado!');
+    }
+
+    if (driver.itinerario) {
+      await prisma.itinerario.update({
+        where: { id: driver.itinerario },
+        data: { motorista: null },
+      });
+    }
+
+    await prisma.driver.delete({ where: { id: id } });
 
     const removedDriver = prisma.driver.findUnique({ where: { id: id } })
 

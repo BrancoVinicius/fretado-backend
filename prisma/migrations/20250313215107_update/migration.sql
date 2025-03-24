@@ -19,8 +19,10 @@ CREATE TABLE "Student" (
     "bairro" TEXT NOT NULL,
     "rua" TEXT NOT NULL,
     "numero" TEXT NOT NULL,
-    "itinerario" TEXT NOT NULL,
-    "fotoB64" TEXT
+    "itinerario" INTEGER,
+    "fotoB64" TEXT,
+    "ordem" INTEGER,
+    "presenca" BOOLEAN NOT NULL DEFAULT true
 );
 
 -- CreateTable
@@ -31,7 +33,7 @@ CREATE TABLE "Driver" (
     "telefone" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "habilitacao" TEXT NOT NULL,
-    "itinerario" TEXT NOT NULL,
+    "itinerario" INTEGER,
     "fotoB64" TEXT
 );
 
@@ -41,7 +43,7 @@ CREATE TABLE "Van" (
     "modelo" TEXT NOT NULL,
     "placa" TEXT NOT NULL,
     "capacidade" TEXT NOT NULL,
-    "itinerario" TEXT NOT NULL,
+    "itinerario" INTEGER,
     "ano" TEXT NOT NULL,
     "cor" TEXT NOT NULL
 );
@@ -60,6 +62,8 @@ CREATE TABLE "Itinerario" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
     "inicio" TEXT NOT NULL,
+    "motorista" INTEGER,
+    "van" INTEGER,
     "final" TEXT NOT NULL
 );
 

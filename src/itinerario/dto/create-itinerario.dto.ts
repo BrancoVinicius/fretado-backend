@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateItinerarioDto {
     @IsNotEmpty()
@@ -10,4 +10,12 @@ export class CreateItinerarioDto {
 
     @IsString()
     final: string;
+
+    @IsOptional()
+    @IsNumber()
+    motorista: number;
+
+    @IsOptional()
+    @IsNumber()
+    van: number;
 }

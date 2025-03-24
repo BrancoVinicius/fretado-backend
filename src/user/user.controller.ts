@@ -30,7 +30,10 @@ export class UserController {
     const student = await this.studentService.findStudentByEmail(user.email);
     if (student != null) {
       //const result = await bcrypt.compare(user.senha, student.senha);
-      if (user.senha == student.senha) { return {data: student, cargo: "aluno"}}
+      if (user.senha == student.senha) { 
+        const { fotoB64, ...studentSemFoto } = student;
+        return { data: studentSemFoto, cargo: "aluno" };
+      }
     }
     const driver = await this.driverService.findDriverByEmail(user.email);
     if (driver != null) {

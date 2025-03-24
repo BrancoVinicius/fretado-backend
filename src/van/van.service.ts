@@ -22,7 +22,7 @@ export class VanService {
           cor: dto.cor,
           ano: dto.ano,
           capacidade: dto.capacidade,
-          itinerario: dto.itinerario
+          itinerario: dto.itinerario ?? null
         }
       });
 
@@ -57,7 +57,21 @@ export class VanService {
   }
 
   async remove(id: number) {
-    const van = await prisma.van.delete({ where: { id: id } });
+
+    const van = await prisma.van.findUnique({ where: { id: id } });
+  
+    if (!van) {
+      throw new Error('Van não encontrado!');
+    }
+
+    if (van.itinerario) {
+      await prisma.itinerario.update({
+        where: { id: van.itinerario },
+        data: { van: null },
+      });
+    }
+
+    await prisma.van.delete({ where: { id: id } });
 
     const removedVan = prisma.van.findUnique({ where: { id: id } })
 

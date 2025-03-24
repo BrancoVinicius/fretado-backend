@@ -28,8 +28,9 @@ export class StudentService {
           telefone: dto.telefone,
           rua: dto.rua,
           numero: dto.numero,
-          itinerario: dto.itinerario,
-          fotoB64: dto.fotoB64 ?? null
+          itinerario: dto.itinerario || null,
+          fotoB64: dto.fotoB64 ?? null,
+          presenca: dto.presenca ?? true
         }
       });
 
@@ -78,6 +79,20 @@ export class StudentService {
       error('Motorista Ainda Existente!')
     } else {
       return `Estudante Removido:\n${student}`;
+    }
+  }
+
+  async updateAlunoOrder(alunos: { id: number, ordem: number }[]) {
+    try {
+      for (const aluno of alunos) {
+        await prisma.student.update({
+          where: { id: aluno.id },
+          data: { ordem: aluno.ordem },
+        });
+      }
+      return { message: "Ordem dos alunos atualizada com sucesso!" };
+    } catch (error) {
+      throw new Error("Erro ao atualizar ordem dos alunos.");
     }
   }
 }

@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ItinerarioService } from './itinerario.service';
 import { CreateItinerarioDto } from './dto/create-itinerario.dto';
 import { UpdateItinerarioDto } from './dto/update-itinerario.dto';
 
 @Controller('itinerario')
 export class ItinerarioController {
-  constructor(private readonly itinerarioService: ItinerarioService) {}
+  constructor(private readonly itinerarioService: ItinerarioService) { }
 
   @Post()
   create(@Body() createItinerarioDto: CreateItinerarioDto) {
@@ -32,7 +32,7 @@ export class ItinerarioController {
     return this.itinerarioService.findItinerarioByNome(nome);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateItinerarioDto: UpdateItinerarioDto) {
     return this.itinerarioService.update(+id, updateItinerarioDto);
   }

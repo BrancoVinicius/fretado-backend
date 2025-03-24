@@ -1,5 +1,5 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
 
 export class CreateDriverDto extends PartialType(CreateUserDto){
@@ -12,8 +12,8 @@ export class CreateDriverDto extends PartialType(CreateUserDto){
     fotoB64: string;
 
     @IsOptional()
-    @IsString()
-    itinerario: string;
+    @IsNumber()
+    itinerario: number;
 
     @IsString()
     telefone: string;

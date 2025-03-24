@@ -26,8 +26,10 @@ model Student {
   bairro     String
   rua        String
   numero     String
-  itinerario String
+  itinerario Int?
   fotoB64    String?
+  ordem      Int?
+  presenca   Boolean @default(true)
 }
 
 model Driver {
@@ -37,7 +39,7 @@ model Driver {
   telefone    String
   senha       String
   habilitacao String
-  itinerario  String
+  itinerario  Int?
   fotoB64     String?
 }
 
@@ -46,7 +48,7 @@ model Van {
   modelo     String
   placa      String @unique
   capacidade String
-  itinerario String
+  itinerario Int?
   ano        String
   cor        String
 }
@@ -60,8 +62,10 @@ model Admin {
 }
 
 model Itinerario {
-  id     Int    @id @default(autoincrement())
-  nome   String @unique
-  inicio String
-  final  String
+  id        Int    @id @default(autoincrement())
+  nome      String @unique
+  inicio    String
+  motorista Int?
+  van       Int?
+  final     String
 }
