@@ -62,7 +62,7 @@ export class AdminController {
     return this.driverService.findAll();
   }
 
-  @Get('/findAdmin:id')
+  @Get('/findAdmin/:id')
   findAdminById(@Param('id') id: string) {
     return this.adminService.findAdminById(+id);
   }

@@ -25,7 +25,10 @@ export class UserController {
     const admin = await this.adminService.findAdminByEmail(user.email);
     if (admin != null) {
       //const result = await bcrypt.compare(user.senha, admin.senha);
-      if (user.senha == admin.senha) { return {data: admin, cargo: "admin"}}
+      if (user.senha == admin.senha) { 
+        const { fotoB64, ...adminSemFoto } = admin;
+        return { data: adminSemFoto, cargo: "admin" };
+      }
     }
     const student = await this.studentService.findStudentByEmail(user.email);
     if (student != null) {
@@ -38,7 +41,10 @@ export class UserController {
     const driver = await this.driverService.findDriverByEmail(user.email);
     if (driver != null) {
       //const result = await bcrypt.compare(user.senha, driver.senha);
-      if (user.senha == driver.senha) { return {data: driver, cargo: "motorista"} }
+      if (user.senha == driver.senha) { 
+        const { fotoB64, ...motoritstaSemFoto } = driver;
+        return { data: motoritstaSemFoto, cargo: "motorista" };
+      }
     } else {
       console.error('Não foi possível efetuar login!\nEmail e/ou senha inválido(s)');
     }
