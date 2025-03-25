@@ -24,6 +24,7 @@ export class StudentService {
           cpf: dto.cpf,
           faculdade: dto.faculdade,
           cep: dto.cep,
+          cidade: dto.cidade,
           bairro: dto.bairro,
           telefone: dto.telefone,
           rua: dto.rua,

@@ -16,6 +16,7 @@ CREATE TABLE "Student" (
     "telefone" TEXT NOT NULL,
     "faculdade" TEXT NOT NULL,
     "cep" TEXT NOT NULL,
+    "cidade" TEXT NOT NULL,
     "bairro" TEXT NOT NULL,
     "rua" TEXT NOT NULL,
     "numero" TEXT NOT NULL,
@@ -62,9 +63,19 @@ CREATE TABLE "Itinerario" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
     "inicio" TEXT NOT NULL,
+    "cep_inicio" TEXT NOT NULL,
+    "cidade_inicio" TEXT NOT NULL,
+    "bairro_inicio" TEXT NOT NULL,
+    "rua_inicio" TEXT NOT NULL,
+    "numero_inicio" TEXT NOT NULL,
+    "final" TEXT NOT NULL,
+    "cep_final" TEXT NOT NULL,
+    "cidade_final" TEXT NOT NULL,
+    "bairro_final" TEXT NOT NULL,
+    "rua_final" TEXT NOT NULL,
+    "numero_final" TEXT NOT NULL,
     "motorista" INTEGER,
-    "van" INTEGER,
-    "final" TEXT NOT NULL
+    "van" INTEGER
 );
 
 -- CreateIndex

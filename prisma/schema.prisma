@@ -23,6 +23,7 @@ model Student {
   telefone   String
   faculdade  String
   cep        String
+  cidade     String
   bairro     String
   rua        String
   numero     String
@@ -62,10 +63,20 @@ model Admin {
 }
 
 model Itinerario {
-  id        Int    @id @default(autoincrement())
-  nome      String @unique
-  inicio    String
-  motorista Int?
-  van       Int?
-  final     String
+  id            Int    @id @default(autoincrement())
+  nome          String @unique
+  inicio        String
+  cep_inicio    String
+  cidade_inicio String
+  bairro_inicio String
+  rua_inicio    String
+  numero_inicio String
+  final         String
+  cep_final     String
+  cidade_final  String
+  bairro_final  String
+  rua_final     String
+  numero_final  String
+  motorista     Int?
+  van           Int?
 }

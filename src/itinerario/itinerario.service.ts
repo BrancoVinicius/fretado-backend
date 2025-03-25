@@ -19,7 +19,17 @@ export class ItinerarioService {
                 data: {
                     nome: dto.nome,
                     inicio: dto.inicio,
+                    cep_inicio: dto.cep_inicio,
+                    cidade_inicio: dto.cidade_inicio,
+                    bairro_inicio: dto.bairro_inicio,
+                    rua_inicio: dto.rua_inicio,
+                    numero_inicio: dto.numero_inicio,
                     final: dto.final,
+                    cep_final: dto.cep_final,
+                    cidade_final: dto.cidade_final,
+                    bairro_final: dto.bairro_final,
+                    rua_final: dto.rua_final,
+                    numero_final: dto.numero_final,
                     van: dto.van ?? null,
                     motorista: dto.motorista ?? null
                 }

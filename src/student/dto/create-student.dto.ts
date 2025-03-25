@@ -10,6 +10,9 @@ export class CreateStudentDto extends PartialType(CreateUserDto) {
     faculdade: string;
 
     @IsString()
+    cidade: string;
+
+    @IsString()
     bairro: string;
 
     @IsString()
